@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 // COMMENT TO DEVELOPER MODE / UNCOMMENT TO UPLOAD TO BINTARRAY
 //apply plugin: 'com.github.dcendents.android-maven'
 //apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven'
+group = 'com.github.navasmdc'
+version = '1.5.1'
 
 android {
     compileSdkVersion 22
@@ -19,12 +22,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     compile 'com.nineoldandroids:library:2.4.+'
     compile 'com.android.support:support-v4:22.+'
     compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: 'file://D:/MavenRepository')
+        pom.project {
+            name 'MaterialDesign'
+            groupId 'com.github.navasmdc'
+            artifactId 'MaterialDesign'
+            version '1.5.1'
+            packaging 'aar'
+
+            developers {
+                developer {
+                    id 'kevin'
+                    name 'kek'
+                }
+            }
+        }
+    }
 }
 
 // COMMENT TO DEVELOPER MODE / UNCOMMENT TO UPLOAD TO BINTARRAY
